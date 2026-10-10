@@ -49,27 +49,22 @@ body {
   z-index: -1;
   background-image: radial-gradient(#26262b 1px, transparent 1px);
   background-size: 16px 16px;
-  mask-image: radial-gradient(ellipse at 85% 20%, #000 0%, transparent 65%);
+  mask-image: radial-gradient(ellipse 45% 70% at 18% 35%, #000 0%, transparent 100%);
 }
 
-/* Portrait: crush the studio black below the page colour, then "lighten"-blend
-   so anything darker than the page vanishes; the mask feathers what is left. */
+/* Portrait: usher-graded.webp already has its studio black re-graded to the
+   page colour, so the mask only has to soften the outer edges. */
 .portrait-mask {
-  mix-blend-mode: lighten;
   -webkit-mask-image: radial-gradient(
-    ellipse 60% 68% at 50% 44%,
-    #000 55%,
+    ellipse 62% 72% at 50% 44%,
+    #000 60%,
     transparent 100%
   );
   mask-image: radial-gradient(
-    ellipse 60% 68% at 50% 44%,
-    #000 55%,
+    ellipse 62% 72% at 50% 44%,
+    #000 60%,
     transparent 100%
   );
-}
-
-.portrait-mask img {
-  filter: brightness(0.9) contrast(1.12);
 }
 
 .text-outline {

@@ -26,10 +26,11 @@ export default function Home() {
           {/* Portrait: black studio background melts into the page */}
           <div className="portrait-mask relative order-last mx-auto mt-12 aspect-square w-full max-w-md lg:absolute lg:inset-y-0 lg:right-[-2rem] lg:mx-0 lg:mt-0 lg:aspect-auto lg:w-[56%] lg:max-w-none">
             <Image
-              src="/usher.jpg"
+              src="/usher-graded.webp"
               alt={`Portrait of ${site.name}`}
               fill
               priority
+              quality={92}
               sizes="(min-width: 1024px) 640px, 90vw"
               className="object-cover object-[50%_15%]"
             />
@@ -151,12 +152,58 @@ export default function Home() {
           </ul>
         </Section>
 
-        <Section id="education" index="03" title="Education">
-          <ul>
-            {education.map((row) => (
-              <TimelineRow key={row.org} {...row} />
-            ))}
-          </ul>
+        <Section
+          id="education"
+          index="03"
+          title="Education"
+          note="Formal training behind the systems I build."
+        >
+          <div className="grid gap-px border border-line bg-line md:grid-cols-5">
+            <div className="flex flex-col bg-background p-6 sm:p-8 md:col-span-3">
+              <div className="flex items-center justify-between gap-4">
+                <span className="border border-line px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-muted">
+                  {education.code}
+                </span>
+                <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-faint">
+                  <span
+                    aria-hidden
+                    className="h-1.5 w-1.5 rounded-full bg-emerald-500"
+                  />
+                  {education.status}
+                </span>
+              </div>
+              <h3 className="mt-12 text-2xl font-semibold leading-tight tracking-tight text-white sm:text-3xl">
+                {education.degree}
+              </h3>
+              <p className="mt-3 text-lg text-neutral-300">{education.major}</p>
+              <ul className="mt-auto flex flex-wrap gap-1.5 pt-10">
+                {education.focus.map((item) => (
+                  <li
+                    key={item}
+                    className="border border-line px-2 py-1 font-mono text-[10px] text-muted"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <dl className="grid grid-cols-1 gap-px bg-line sm:grid-cols-2 md:col-span-2 md:grid-cols-1">
+              {[
+                ["School", education.school],
+                ["Period", education.period],
+              ].map(([label, value]) => (
+                <div key={label} className="bg-background p-6 sm:p-8">
+                  <dt className="font-mono text-[10px] uppercase tracking-wider text-faint">
+                    {label}
+                  </dt>
+                  <dd className="mt-2 text-lg font-medium text-white">
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </Section>
 
         <Section
