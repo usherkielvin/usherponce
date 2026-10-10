@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #09090b;
+  --foreground: #ededed;
+  --line: #1c1c1f;
+  --muted: #8b8b93;
+  --faint: #55555c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-line: var(--line);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: #2a2a2e;
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 1px solid #ededed;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Dot grid that fades out toward the left and bottom of the hero */
+.hero-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(#26262b 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: radial-gradient(ellipse at 85% 20%, #000 0%, transparent 65%);
+}
+
+/* Portrait: crush the studio black below the page colour, then "lighten"-blend
+   so anything darker than the page vanishes; the mask feathers what is left. */
+.portrait-mask {
+  mix-blend-mode: lighten;
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 68% at 50% 44%,
+    #000 55%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    ellipse 60% 68% at 50% 44%,
+    #000 55%,
+    transparent 100%
+  );
+}
+
+.portrait-mask img {
+  filter: brightness(0.9) contrast(1.12);
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #6b6b73;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
